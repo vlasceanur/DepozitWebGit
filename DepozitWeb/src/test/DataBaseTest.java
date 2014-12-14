@@ -100,6 +100,15 @@ public class DataBaseTest {
 	@Test
 	public void addItemToProvider()
 	{
-		assertTrue("Must be added", DataBaseManager.addItemToProvider(1, 1));
+		assertTrue("Must be added", DataBaseManager.addItemToProvider(1, 2));
 	}
+	
+	@Test
+	public void removeItemFromProvider()
+	{
+		assertTrue("Must be deleted", DataBaseManager.removeItemFromProvider(1, 2));
+		assertFalse("Must fail", DataBaseManager.removeItemFromProvider(1,2));
+	}
+	
+	
 }

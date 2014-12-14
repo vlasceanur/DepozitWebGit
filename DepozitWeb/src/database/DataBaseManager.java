@@ -294,6 +294,9 @@ public class DataBaseManager {
 	
 	public static boolean addItemToProvider(int provider_id, int item_id)
 	{
+		if(checkItemOfProvider(provider_id, item_id))
+			return false;
+		
 		Connection conn = DataBase.getConnection();
 		if(conn == null)
 			throw new RuntimeException("Connection is null");
@@ -309,5 +312,43 @@ public class DataBaseManager {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}			
+	}
+	
+	private static boolean checkItemOfProvider(int provider_id, int item_id)
+	{
+		Connection conn = DataBase.getConnection();
+		if(conn == null)
+			throw new RuntimeException("Connection is null");
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM providers_stock WHERE provider_id=? AND item_id=?");
+			ps.setInt(1, provider_id);
+			ps.setInt(2, item_id);
+			
+			if(ps.executeQuery().next())
+				return true;
+			return false;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}		
+	}
+	
+	public static boolean removeItemFromProvider(int provider_id, int item_id)
+	{
+		Connection conn = DataBase.getConnection();
+		if(conn == null)
+			throw new RuntimeException("Connection is null");
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM providers_stock WHERE provider_id=? AND item_id=?");
+			ps.setInt(1, provider_id);
+			ps.setInt(2, item_id);
+			
+			if(ps.executeUpdate()==1)
+				return true;
+			return false;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}		
 	}
 }

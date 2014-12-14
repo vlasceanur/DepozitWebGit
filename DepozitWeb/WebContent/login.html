@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login page</title>
+<style type="text/css">
+body
+{
+	width: 100%;
+	text-align: center;
+}
+#loginbox
+{
+	display: inline-block;
+	padding-top: 15%;
+}
+
+.btn_holder
+{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div id="loginbox">
+	<form action="LoginServlet" method="POST">
+	<table>
+		<tr>
+			<td>Username:</td><td><input type="text" name="usr"></td>
+		</tr>
+		<tr>
+			<td>Password:</td><td><input type="password" name="pwd"></td>
+		</tr>
+		<tr>
+			<td class="btn_holder"><button type="submit">Log in</button></td><td class="btn_holder"><button form="new_user">Create new user</button></td>
+		</tr>
+	</table>
+	</form>
+	</div>	
+	<form action="create.html" id="new_user"></form>
+</body>
+</html>

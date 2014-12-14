@@ -23,8 +23,10 @@ public class DataBase {
 		if(INSTANCE == null)
 		{
 			try {
+				DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 				INSTANCE = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			} catch (SQLException e) {
+				System.out.println(e);
 				INSTANCE = null;
 			}
 		}

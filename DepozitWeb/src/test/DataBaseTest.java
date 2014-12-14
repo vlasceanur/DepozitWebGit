@@ -97,7 +97,9 @@ public class DataBaseTest {
 		assertTrue(DataBaseManager.addItemToWarehouse(55, 55, 100));
 	}
 	
-	/*
-	Urmeaza provider stock
-*/
+	@Test
+	public void addItemToProvider()
+	{
+		assertTrue("Must be added", DataBaseManager.addItemToProvider(1, 1));
+	}
 }

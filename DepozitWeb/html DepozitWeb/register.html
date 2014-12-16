@@ -1,0 +1,75 @@
+<html>
+<head>
+	<style type="text/css">
+		body
+		{
+			text-align: center;
+			}
+		form > div > label
+		{
+
+			min-width: 80px;					
+			display: inline-block;	
+		}
+		table
+		{
+			display: inline-block;
+		}
+		#usrmsg, #pwdmsg1
+		{
+			visibility: hidden;
+		}
+	</style>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create new user</title>
+</head>
+<body>
+	<form action="CreateRegularUserServlet" onsubmit="return verify()">
+		<table>
+		<tr><td><div><label>Username:</label> <input type="text" id="u" name="name" required/></div></td><td><label id="usrmsg">Msg</label></td></tr>
+		<tr><td><div><label>Password:</label> <input type="password" id="p1" name="pwd1" required/></div></td><td><label id="pwdmsg1">Msg</label></td></tr>
+		<tr><td><div><label>Password:</label> <input type="password" id="p2" name="pwd2" required/></div></td><td></td></tr>
+		<tr><td><button type = "submit">Create</button><button type = "reset">Reset</button></td
+		</table>
+	</form>
+<script type="text/javascript">
+function verify()
+{
+	
+	var usr = document.getElementById("u").value;
+	var pwd1 = document.getElementById("p1").value;
+	var pwd2 = document.getElementById("p2").value;
+	var userMsg = document.getElementById("usrmsg");
+	var pwdmsg = document.getElementById("pwdmsg1");
+
+	userMsg.style.visibility = "hidden";
+	pwdmsg.style.visibility ="hidden";
+
+	var k = true;
+	
+	if(pwd1 !== pwd2)
+	{
+		
+		pwdmsg.innerHTML = "Passwords not matching";
+		pwdmsg.style.visibility = "visible";
+		pwdmsg.style.color="red";
+
+		k = false;
+	}
+
+	var usrLowerCase = usr.toLowerCase();
+	if(usrLowerCase.match("[a-z]")[0] !== usrLowerCase)
+	{
+		
+		userMsg.innerHTML = "Invalid character in username. Allowed characters are [a-zA-Z]";
+		userMsg.style.visibility = "visible";
+		userMsg.style.color = "red";
+		
+		k = false;
+	}
+	
+	return k;
+}
+</script>
+</body>
+</html>

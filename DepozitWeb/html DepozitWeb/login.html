@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<style>
+body{
+	text-align: center;
+}
+#loginform
+{
+	display: inline-block;
+	color: blue;
+}
+
+td, table
+{
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
+
+.no_border
+{
+	border-color: red;
+	border-width: 0px;
+}
+</style>
+</head>
+<body>
+<div id="loginform">
+	<form action="loginServlet" method="POST" onsubmit="return verify()">
+		<table style="border-width:0px">
+			<tr class="no_border" >
+				<td class="no_border" colspan = "2"><label style="visibility:hidden" id="msg">MSG</label></td>
+			</tr>
+			<tr>
+				<td><label>Username:</label></td> <td><label><input type="text" id = "usr" name="usr" required></label></td>
+			</tr>
+			<tr>
+				<td><label>Password:</label></td> <td><label><input type="password" id= "pwd" name="pwd" required></label></td>
+			</tr>			
+			<tr>
+				<td colspan="2" style="text-align:center"><button>Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+function verify()
+{
+	var user = document.getElementById("usr").value;
+	var pwd = document.getElementById("pwd").value;
+	
+
+	var msg = document.getElementById("msg");
+	msg.style.visibility = "hidden";
+	var lw = user.toLowerCase();
+	var m = lw.match("[a-z]*");
+	if(m[0] !== lw)
+	{
+		
+		msg.innerHTML = "Invalid characters in username.";
+		msg.style.visibility = "visible";
+		msg.style.color = "red";
+		return false;
+	}
+}
+</script>
+</body>
+</html>

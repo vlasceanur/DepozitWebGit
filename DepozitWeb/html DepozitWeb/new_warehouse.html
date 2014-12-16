@@ -1,0 +1,83 @@
+<html>
+<head>
+	<style type="text/css">
+		body
+		{
+			text-align: center;
+			}
+		
+		table
+		{
+			display: inline-block;
+		}		
+	</style>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create new warehouse</title>
+</head>
+<body>
+	<form action="CreateNewWarehouse" method="POST">
+		<table>
+		<tr>
+				<td>
+					<div>
+						<label>Name:</label> 						
+					</div>
+				</td>
+				<td><input type="text" id="u" name="name" required/></td>				
+		</tr>
+
+		<tr>
+				<td>
+					<div>
+						<label>Location:</label> 						
+					</div>
+				</td>				
+				<td>
+					<input type="text" id="p1" name="location" required/>
+				</td>
+		</tr>
+
+		<tr>
+				<td>
+					<div>
+						<label>Capital:</label> 						
+					</div>
+				</td>				
+				<td>
+					<input type="text" id="p2" name="capital" required/>
+				</td>
+		</tr>
+		<tr>
+				<td>
+					<div>
+						<label>Volume:</label> 
+						
+					</div>
+				</td>
+				<td>
+					<input type="text" id="p2" name="volume" required/>
+				</td>
+		</tr>
+		<tr>
+				<td>
+					<div>
+						<label>Manager:</label> 	
+					</div>	
+				</td>
+				<td>
+				<select name="manager">
+					<option value=1>Nume1</option>
+					<option value=2>Nume2</option>
+					<option value=3>Nume3</option>
+				</select></div></td><td></td></tr>
+				</td>
+		</tr>				
+		<tr>
+			<td>
+				<button type = "submit">Create</button><button type = "reset">Reset</button>
+			</td>
+		</table>
+	</form>
+
+</body>
+</html>

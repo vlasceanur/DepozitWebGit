@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import database.DataBase;
 import database.DataBaseManager;
@@ -22,6 +20,10 @@ public class User {
 	private int type;
 	
 	private boolean verified = false;
+	public boolean isVerified()
+	{
+		return verified;
+	}
 	
 	public User(String name, String password)
 	{
@@ -68,14 +70,19 @@ public class User {
 		System.out.println(verified);
 	}
 	
-	public Cookie createCookieAndSession(HttpSession s)
+	public boolean createCookieAndSession(HttpSession s)
 	{
 		if(verified == true)
 		{
-			if(s == null) return null;
+			if(s == null) return false;
 			s.setAttribute("user", this);
-			return new Cookie("user", this.hashCode() + "");			
+			return true;				
 		}
-		return null;
-	}		
+		return false;
+	}	
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

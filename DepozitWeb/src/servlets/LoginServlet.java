@@ -1,27 +1,29 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pages.PAGE_URL;
-import database.DataBaseManager;
+import users.User;
 
 /**
- * Servlet implementation class CreateRegularUserServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/CreateRegularUserServlet")
-public class CreateRegularUserServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateRegularUserServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +32,7 @@ public class CreateRegularUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 	}
 
 	/**
@@ -38,23 +40,31 @@ public class CreateRegularUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("usr");
-		String password1 = request.getParameter("pwd1");
-		String password2 = request.getParameter("pwd2");
 		
-		
-		if(password1.equals(password2) == true)
+		User u = new User(request.getParameter("usr"), request.getParameter("pwd"));
+		HttpSession s = request.getSession();
+		if(s.getAttribute("user") != null)
 		{
-			if(!DataBaseManager.userExists(username))
+			response.sendRedirect(PAGE_URL.HOME_PAGE);
+			return;
+		}
+		try {
+			if(u.verify() == true)
 			{
-				if(DataBaseManager.createUser(username, password1))
-				{
-					response.sendRedirect(PAGE_URL.HOME_PAGE);
-					return;
-				}
+				
+				s.setAttribute("user", u);
+				response.sendRedirect(PAGE_URL.HOME_PAGE);
+				return;
 			}
-		}		
-		response.sendRedirect(PAGE_URL.CREATE_REGULAR);
+			else
+			{				
+				response.sendRedirect(PAGE_URL.LOG_IN_HTML);
+				return;
+			}
+		} catch (SQLException e) {
+			response.sendRedirect(PAGE_URL.LOG_IN_HTML);
+			return;
+		}
 	}
 
 }

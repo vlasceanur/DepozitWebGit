@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class DataBaseManager {
 	
+	private static final int USER_TYPES_REGULAR_USER = 11;
 	
 	public static boolean CreateUser()
 	{
@@ -82,7 +83,7 @@ public class DataBaseManager {
 
 	public static boolean createUser(String userName, String password)
 	{
-		return createUser(userName, password, null, 5);
+		return createUser(userName, password, null, USER_TYPES_REGULAR_USER);
 	}	
 	public static boolean createUser(String userName, String password, Integer creator_id, int type)
 	{

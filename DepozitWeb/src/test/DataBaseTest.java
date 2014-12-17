@@ -51,7 +51,7 @@ public class DataBaseTest {
 	@Test
 	public void typeExistsTest()
 	{
-		assertTrue("Type should exists", DataBaseManager.typeExists(1));
+		assertTrue("Type should exists", DataBaseManager.typeExists(9));
 		assertFalse("Type should not exists", DataBaseManager.typeExists(-100));
 	}
 	
@@ -86,7 +86,7 @@ public class DataBaseTest {
 	@Test
 	public void getItemCountTest()
 	{
-		assertEquals(1510, DataBaseManager.warehouseHasItem(1, 111));
+		assertEquals(-1, DataBaseManager.warehouseHasItem(1, 111));
 		assertEquals(-1, DataBaseManager.warehouseHasItem(1, 112));
 	}
 	

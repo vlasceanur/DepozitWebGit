@@ -1,42 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Login page</title>
-<style type="text/css">
-body
-{
-	width: 100%;
+
+<style>
+body{
 	text-align: center;
 }
-#loginbox
+#loginform
 {
 	display: inline-block;
-	padding-top: 15%;
+	color: blue;
 }
 
-.btn_holder
+td, table
 {
-	text-align: center;
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
+
+.no_border
+{
+	border-color: red;
+	border-width: 0px;
 }
 </style>
 </head>
 <body>
-	<div id="loginbox">
-	<form action="LoginServlet" method="POST">
-	<table>
-		<tr>
-			<td>Username:</td><td><input type="text" name="usr"></td>
-		</tr>
-		<tr>
-			<td>Password:</td><td><input type="password" name="pwd"></td>
-		</tr>
-		<tr>
-			<td class="btn_holder"><button type="submit">Log in</button></td><td class="btn_holder"><button form="new_user">Create new user</button></td>
-		</tr>
-	</table>
+<div id="loginform">
+	<form action="LoginServlet" method="POST" onsubmit="return verify()">
+		<table style="border-width:0px">
+			<tr class="no_border" >
+				<td class="no_border" colspan = "2"><label style="visibility:hidden" id="msg">MSG</label></td>
+			</tr>
+			<tr>
+				<td><label>Username:</label></td> <td><label><input type="text" id = "usr" name="usr" required></label></td>
+			</tr>
+			<tr>
+				<td><label>Password:</label></td> <td><label><input type="password" id= "pwd" name="pwd" required></label></td>
+			</tr>			
+			<tr>
+				<td colspan="2" style="text-align:center"><button>Submit</button></td>
+			</tr>
+		</table>
 	</form>
-	</div>	
-	<form action="create.html" id="new_user"></form>
+</div>
+
+<script type="text/javascript">
+function verify()
+{
+	var user = document.getElementById("usr").value;
+	var pwd = document.getElementById("pwd").value;
+	
+
+	var msg = document.getElementById("msg");
+	msg.style.visibility = "hidden";
+	var lw = user.toLowerCase();
+	var m = lw.match("[a-z]*");
+	if(m[0] !== lw)
+	{
+		
+		msg.innerHTML = "Invalid characters in username.";
+		msg.style.visibility = "visible";
+		msg.style.color = "red";
+		return false;
+	}
+}
+</script>
 </body>
 </html>

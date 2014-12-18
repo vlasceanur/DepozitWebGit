@@ -12,6 +12,15 @@ import database.DataBase;
 import database.DataBaseManager;
 
 public class User {
+	
+	
+	public static final	int Administrator = 9;
+	public static final int	Accountant = 10;
+	public static final	int Regular = 11;	
+	public static final int WarehouseManager = 12;
+	public static final int Provider = 13;
+	
+	
 	private int id;
 	private String name;
 	private String password;
@@ -23,6 +32,11 @@ public class User {
 	public boolean isVerified()
 	{
 		return verified;
+	}
+	
+	public int getType()
+	{
+		return type;
 	}
 	
 	public User(String name, String password)
@@ -37,13 +51,13 @@ public class User {
 			return false;
 		
 		Connection conn = DataBase.getConnection();
+		
 		if(conn == null)
 			throw new RuntimeException("Invalid connection");
 		
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE user_name = ? AND user_password = ?");
 		ps.setString(1, name);
 		ps.setString(2, password);
-		
 		ResultSet rs = ps.executeQuery();
 		if(rs.next())
 		{

@@ -23,7 +23,7 @@ import users.User;
  */
 @WebFilter("/AuthFilter")
 public class AuthFilter implements Filter {
-	List<String> ignoredURL = new LinkedList<String>();
+	private List<String> ignoredURL = new LinkedList<String>();
 
 	/**
 	 * Default constructor.
@@ -91,6 +91,8 @@ public class AuthFilter implements Filter {
 		ignoredURL.add(PAGE_URL.LOG_IN_HTML);
 		ignoredURL.add(PAGE_URL.LOG_IN_SERVLET);
 		ignoredURL.add(PAGE_URL.LOG_IN_SERVLET);
+		
+		
 	}
 
 }

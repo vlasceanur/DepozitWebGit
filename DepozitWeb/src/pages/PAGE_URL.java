@@ -9,9 +9,9 @@ public class PAGE_URL {
 	public final static String BROWSE_ITEMS = "items.jsp";
 	public final static String BROWSE_BASKET = "basket.jsp";
 	
-	public final static String ADMIN_CREATE_WAREHOUSE = "";
+	public final static String ADMIN_CREATE_WAREHOUSE = "new_warehouse.jsp";
 	public final static String ADMIN_EDIT_WAREHOUSE = "";
-	public final static String ADMIN_EDIT_USERS = "";  
+	public final static String ADMIN_EDIT_USERS = "edit_users.jsp";  
 	
 	
 	public final static String MANAGER_EDIT_PROVIDER = "";

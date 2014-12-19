@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class DataBaseManager {
 	
@@ -351,5 +355,75 @@ public class DataBaseManager {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}		
+	}
+	
+	public static ResultSet getUser(int id)
+	{
+		Connection conn = DataBase.getConnection();
+		if(conn == null)
+			throw new RuntimeException("Connection is null");
+		
+		try
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE user_id = ?");
+			ps.setInt(1, id);
+			
+			return ps.executeQuery();
+		}
+		catch (SQLException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static Map<Integer, String> getUsers()
+	{
+		Connection conn = DataBase.getConnection();
+		if(conn == null)
+			throw new RuntimeException("Connection is null");
+		try
+		
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT user_id, user_name FROM users");
+			ResultSet rs = ps.executeQuery();
+			
+			Map<Integer, String> map = new TreeMap<Integer, String>();
+			
+			while(rs.next())
+			{
+				map.put(rs.getInt(1), rs.getString(2));
+			}
+			return map;
+		}
+		catch (SQLException e)
+		{
+			throw new RuntimeException(e);
+		}		
+	}
+	
+	public static Map<Integer, String> getTypes()
+	{				
+		Connection conn = DataBase.getConnection();
+		if(conn == null)
+			throw new RuntimeException("Connection is null");
+		
+		try		
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT user_type, user_type_name FROM user_types");
+			ResultSet rs = ps.executeQuery();
+			
+			Map<Integer, String> map = new TreeMap<Integer, String>();
+			
+			while(rs.next())
+			{
+				map.put(rs.getInt(1), rs.getString(2));
+			}
+			return map;
+		}
+		catch (SQLException e)
+		{
+			throw new RuntimeException(e);
+		}		
+		
 	}
 }

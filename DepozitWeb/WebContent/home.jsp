@@ -12,6 +12,10 @@
 			sb.append("<li><a href=\"")
 			.append(PAGE_URL.ADMIN_CREATE_WAREHOUSE)
 			.append("\">Create new warehouse</a></li>");
+			
+			sb.append("<li><a href=\"")
+			.append(PAGE_URL.ADMIN_EDIT_USERS)
+			.append("\">Edit users</a></li>");
 		}
 	}
 	else
